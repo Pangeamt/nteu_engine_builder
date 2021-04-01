@@ -1,7 +1,17 @@
 # NTEU Engine Builder
 
+
 ## A. Install
-git clone
+
+### 1. Clone the repository
+```BASH
+git clone https://github.com/Pangeamt/nteu_engine_builder.git
+```
+
+### 2. Install requirements
+```BASH
+pip install -r requirements.txt
+```
 
 ## B. Instructions
 

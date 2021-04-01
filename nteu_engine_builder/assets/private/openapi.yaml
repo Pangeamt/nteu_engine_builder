@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: NTEU gateway API
+servers:
+  - url: "/api/1.0.0"
+paths:
+  /translate:
+    post:
+      summary: Translate some texts
+      operationId: translate
+      requestBody:
+        required: true
+        description: A JSON object containing the texts to transle
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                texts:
+                  type: array
+                  items:
+                    type: string
+                  maxItems: 1000
+                  minItems: 1
+                priority:
+                  type: integer
+                  maximum: 1000
+                  minimum: -1000
+                  default: 0
+              required:
+                - texts
+      responses:
+        '200':
+          description: Translations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  translations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        translation:
+                          type: string
+
+        '500':
+          description: Translation Error
+          content:
+            application/json:
+              schema:
+                type: object
+        '499':
+          description: Client Closed Request
+          content:
+            application/json:
+              schema:
+                type: object
+  /initialize:
+    post:
+      summary: Initialize UI
+      operationId: initialize
+      responses:
+        '200':
+          description: UI data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  srcLang:
+                    type: string
+                  tgtLang:
+                    type: string
+                  gatewayType:
+                    type: string
+                  help:
+                    type: string
+
+        '499':
+          description: Client Closed Request
+          content:
+            application/json:
+              schema:
+                type: object

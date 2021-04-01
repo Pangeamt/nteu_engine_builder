@@ -1,0 +1,24 @@
+# NTEU engines are composed by 3 web services running together
+
+
+# Gateway
+gateway:
+  host:  0.0.0.0
+  port: 10000
+  supervisordStartCmd: "sh -c 'python3.7 /gateway_launcher.py && kill 1'"
+
+# Segmenter
+segmenter:
+  host:  0.0.0.0
+  port: 10001
+  supervisordStartCmd: "sh -c 'rackup --host {{ segmenter.host }} -p {{ segmenter.port }} && kill 1'"
+
+# Translation engine
+translationEngine:
+  srcLang: 'es'
+  tgtLang: 'en'
+  dockerCmds:
+    # Fake translation engine dependencies
+    - "RUN python3.7 -m pip install nteu-translation-engine-fake==2.0.0"
+    - "COPY private/translation_engine_fake_launcher.py /translation_engine_fake_launcher.py"
+  supervisordStartCmd: "sh -c 'python3.7 /translation_engine_fake_launcher.py && kill 1'"
