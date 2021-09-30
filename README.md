@@ -1,6 +1,8 @@
 # NTEU Engine Builder
 
 
+This library has been developed by [Pangeanic](https://www.pangeanic.com) as part of the NTEU project, funded by the European Commission. 
+
 ## A. Install
 
 ### 1. Clone the repository
